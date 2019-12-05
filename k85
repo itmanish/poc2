@@ -1,0 +1,37 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: automation-poc2
+  labels:
+    app: httpd
+spec:
+  type: LoadBalancer
+  ports:
+  - port: 80
+    targetPort: 80
+    nodePort: 31280
+    protocol: TCP
+  selector:
+    app: httpd
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: automation-poc2
+  labels:
+    app: httpd
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: httpd
+  template:
+    metadata:
+      labels:
+        app: httpd
+    spec:
+      containers:
+      - name: nginx
+        image: manishit244/httpd-poc2
+        ports:
+        - containerPort: 80
