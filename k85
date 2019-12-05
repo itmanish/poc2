@@ -31,7 +31,7 @@ spec:
         app: httpd
     spec:
       containers:
-      - name: nginx
+      - name: httpd
         image: manishit244/httpd-poc2
         ports:
         - containerPort: 80
